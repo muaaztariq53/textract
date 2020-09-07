@@ -66,8 +66,11 @@ class BaseParser(object):
 
         # use chardet to automatically detect the encoding text if no encoding is provided
         result = chardet.detect(text)
-        return text.decode(result['encoding'])
-
+        try:
+            return text.decode(result['encoding'])
+        except:
+            return text.decode("utf-8")
+                 
 
 class ShellParser(BaseParser):
     """The :class:`.ShellParser` extends the :class:`.BaseParser` to make
